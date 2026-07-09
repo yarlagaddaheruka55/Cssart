@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure CSS Mascot Artwork - Pikachu</title>
+    <style>
+        :root {
+            --pika-yellow: #FDD835;
+            --pika-dark-yellow: #FBC02D;
+            --pika-black: #212121;
+            --pika-red: #E53935;
+            --pika-pink: #FF8A80;
+            --pika-white: #FFFFFF;
+            --bg-gradient: linear-gradient(135deg, #64b5f6, #1565c0);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        .art-canvas {
+            position: relative;
+            width: 400px;
+            height: 450px;
+            margin-bottom: 20px;
+        }
+
+        /* --- PIKACHU HEAD --- */
+        .head {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 220px;
+            background-color: var(--pika-yellow);
+            border-radius: 110px 110px 130px 130px / 120px 120px 100px 100px;
+            box-shadow: inset 0 -12px 0 var(--pika-dark-yellow), 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* --- EARS --- */
+        .ear {
+            position: absolute;
+            top: -20px;
+            width: 55px;
+            height: 180px;
+            background-color: var(--pika-yellow);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            z-index: 5;
+            overflow: hidden;
+            box-shadow: inset -5px 0 0 var(--pika-dark-yellow);
+        }
+
+        .ear.left {
+            left: -10px;
+            transform: rotate(-32deg);
+            transform-origin: bottom right;
+        }
+
+        .ear.right {
+            right: -10px;
+            transform: rotate(32deg);
+            transform-origin: bottom left;
+            box-shadow: inset 5px 0 0 var(--pika-dark-yellow);
+        }
+
+        /* Ear Black Tips via Pseudo-elements */
+        .ear::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 55px;
+            background-color: var(--pika-black);
+        }
+        
+        .ear.left::before {
+            border-radius: 0 0 0 100%;
+            transform: rotate(-10deg) scale(1.2);
+        }
+
+        .ear.right::before {
+            border-radius: 0 0 100% 0;
+            transform: rotate(10deg) scale(1.2);
+        }
+
+        /* --- EYES --- */
+        .eye {
+            position: absolute;
+            top: 75px;
+            width: 42px;
+            height: 42px;
+            background-color: var(--pika-black);
+            border-radius: 50%;
+            z-index: 15;
+        }
+
+        .eye.left { left: 40px; }
+        .eye.right { right: 40px; }
+
+        /* Eye Highlights */
+        .eye::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            background-color: var(--pika-white);
+            border-radius: 50%;
+        }
+        .eye.left::after { right: 6px; }
+        .eye.right::after { left: 6px; }
+
+        /* --- CHEEKS --- */
+        .cheek {
+            position: absolute;
+            bottom: 35px;
+            width: 52px;
+            height: 52px;
+            background-color: var(--pika-red);
+            border-radius: 50%;
+            z-index: 15;
+            box-shadow: 0 4px 10px rgba(229,57,53,0.3);
+        }
+
+        .cheek.left { left: 15px; }
+        .cheek.right { right: 15px; }
+
+        /* --- NOSE --- */
+        .nose {
+            position: absolute;
+            top: 112px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 8px;
+            background-color: var(--pika-black);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            z-index: 20;
+        }
+
+        /* --- MOUTH --- */
+        .mouth-container {
+            position: absolute;
+            top: 122px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 50px;
+            z-index: 15;
+            overflow: hidden;
+        }
+
+        /* Curved Lip Lines */
+        .lip {
+            position: absolute;
+            top: -10px;
+            width: 36px;
+            height: 24px;
+            border: 3px solid var(--pika-black);
+            background-color: var(--pika-yellow);
+            border-radius: 50%;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            z-index: 16;
+        }
+
+        .lip.left {
+            left: 1px;
+            transform: rotate(25deg);
+            border-radius: 0 0 18px 18px / 0 0 15px 15px;
+            border-left-color: var(--pika-black);
+        }
+
+        .lip.right {
+            right: 1px;
+            transform: rotate(-25deg);
+            border-radius: 0 0 18px 18px / 0 0 15px 15px;
+            border-right-color: var(--pika-black);
+        }
+
+        /* Open Tongue/Mouth Cavity */
+        .mouth-open {
+            position: absolute;
+            top: 10px;
+            left: 15%;
+            width: 70%;
+            height: 38px;
+            background-color: #880e4f;
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            border: 3px solid var(--pika-black);
+            border-top: none;
+            z-index: 12;
+            overflow: hidden;
+        }
+
+        .mouth-open::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 26px;
+            background-color: var(--pika-pink);
+            border-radius: 50% 50% 0 0;
+        }
+
+        /* --- PROJECT METADATA DISPLAY --- */
+        .links-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 15px 25px;
+            border-radius: 30px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        .links-panel a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .links-panel a:hover {
+            color: #fff59d;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="art-canvas">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+
+        <div class="head">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            
+            <div class="nose"></div>
+            
+            <div class="mouth-container">
+                <div class="lip left"></div>
+                <div class="lip right"></div>
+                <div class="mouth-open"></div>
+            </div>
+
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+        </div>
+    </div>
+
+    <div class="links-panel">
+        <a href="https://github.com/your-username/pure-css-mascot" target="_blank">📂 GitHub Repository</a>
+        <a href="https://your-username.github.io/pure-css-mascot/" target="_blank">🌐 Live Deployment</a>
+    </div>
+
+</body>
+</html>
